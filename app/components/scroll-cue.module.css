@@ -1,0 +1,21 @@
+.cue {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  margin-left: -11px;
+  width: 22px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #8b7bac;
+  pointer-events: none;
+}
+
+@media (max-width: 720px) {
+  .cue { top: 16px; }
+}
+
+@media (max-width: 380px) {
+  .cue { display: none; }
+}

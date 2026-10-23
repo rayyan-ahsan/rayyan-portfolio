@@ -1,36 +1,33 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Rayyan's Portfolio
 
-## Getting Started
+A personal portfolio for experimenting with design and interaction. The current Animal Crossing inspired theme combines Photoshop-edited assets, clear navigation, responsive layouts, and playful motion.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- A draggable developer tag with spring motion and rotation.
+- A project pinboard with draggable cards and expandable details.
+- Screenshot galleries and video walkthroughs.
+- Scroll reveals, smooth navigation, and hover effects.
+- Responsive layouts and reduced motion support.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Built with
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Next.js 16, React 19, TypeScript, CSS, Tailwind CSS 4, and Motion.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Running locally
 
-## Learn More
+Install dependencies with `npm ci`, then run `npm run dev` and open http://localhost:3000.
 
-To learn more about Next.js, take a look at the following resources:
+The original design uses local fonts that are **not included in this public repository**. Supply your appropriately licensed font files in `assets/fonts/` using the filenames referenced in `app/layout.tsx`, or change that font configuration to use fonts available to you. The original files are the L, M, B and UB weights of FOT-RodinBokutoh Pro, and the L, M, B and EB weights of FOT-Seurat Pro.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The fonts must also be available to the build environment when deploying from source. They remain present in the author's local checkout; ignoring them in Git does not remove them from disk.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Checks
 
-## Deploy on Vercel
+- `npm run build`: production build.
+- `npx tsc --noEmit --incremental false`: TypeScript check.
+- `npm run lint`: ESLint.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Assets
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Project screenshots and demos show the projects featured on the site. Phosphor and Lucide icon licence notices are included in `assets/`. Third-party artwork, logos, and fonts retain their respective ownership.
