@@ -302,7 +302,11 @@ export default function Projects() {
         >
           <div className={styles.boardLabel} aria-hidden="true">Ray&apos;s project board</div>
           <div className={styles.grid}>
-            {projects.map((project, index) => (
+            {Array.from({ length: Math.ceil(projects.length / 2) }, (_, rowIndex) => (
+              <div className={styles.projectRow} key={rowIndex}>
+              {projects.slice(rowIndex * 2, rowIndex * 2 + 2).map((project, columnIndex) => {
+                const index = rowIndex * 2 + columnIndex;
+                return (
               <motion.article
                 key={project.id}
                 className={styles.cardSlot}
@@ -324,6 +328,7 @@ export default function Projects() {
                   <ul className={styles.stack} aria-label={`${project.name} technologies`}>
                     {project.stack.map((tech) => <li key={tech}>{tech}</li>)}
                   </ul>
+                  <div className={styles.projectControls}>
                   {project.demo && (
                     <AnimatedDetails
                       label="Watch demo"
@@ -393,9 +398,13 @@ export default function Projects() {
                     ))}
                     {project.private && <span className={styles.privateNote}>Source code private</span>}
                   </div>
+                  </div>
                 </div>
                 </PinnedProjectCard>
               </motion.article>
+                );
+              })}
+              </div>
             ))}
           </div>
         </motion.div>
