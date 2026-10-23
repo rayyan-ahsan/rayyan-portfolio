@@ -11,6 +11,7 @@ const acTitle = localFont({
     { path: "../assets/fonts/FOT-RodinBokutoh Pro UB.otf", weight: "800", style: "normal" },
   ],
   variable: "--font-ac-title",
+  preload: false,
   display: "swap",
 });
 
@@ -22,6 +23,7 @@ const acUi = localFont({
     { path: "../assets/fonts/FOT-Seurat Pro EB.otf", weight: "800", style: "normal" },
   ],
   variable: "--font-ac-ui",
+  preload: false,
   display: "swap",
 });
 

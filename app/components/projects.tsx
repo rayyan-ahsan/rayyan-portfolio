@@ -411,8 +411,8 @@ export default function Projects() {
 
         <motion.footer className={styles.footer} {...reveal}>
           <div>
-            <h2>Let&apos;s build something good.</h2>
-            <p>Interested in my work? I&apos;d love to hear from you.</p>
+            <h2>Let&apos;s work together!</h2>
+            <p>Reach out, I&apos;d love to hear from you :)</p>
           </div>
           <motion.a
             className={`${styles.contact} button-shine`}

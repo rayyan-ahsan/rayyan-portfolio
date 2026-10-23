@@ -64,6 +64,7 @@ img, a, button { -webkit-user-drag: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .wood-sign-float { animation: none !important; }
   html { scroll-behavior: auto; }
   .animated-underline { transition: none; }
   .button-shine::before { display: none; }

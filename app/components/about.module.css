@@ -94,6 +94,12 @@
 .favouriteGames { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; }
 .favouriteGames li { padding: 4px 7px; border-radius: 6px; background: #fffbef99; font-size: .65rem; line-height: 1.6; }
 .personalNote .moreGames { margin-top: 8px; color: #7c705e; font-size: .65rem; }
+@media (min-width: 721px) {
+  .panel { padding-block: 28px; row-gap: 26px; }
+  .portrait { top: -56px; }
+  .personal { padding-top: 20px; }
+}
+
 @media (max-width: 720px) {
   .section { padding: 96px 16px 72px; margin-top: 40px; scroll-margin-top: 16px; background: linear-gradient(to bottom, #f5ead6 0 36px, var(--about-background, #eee2c9) 36px); }
   .divider { height: 48px; }

@@ -28,6 +28,20 @@ The fonts must also be available to the build environment when deploying from so
 - `npx tsc --noEmit --incremental false`: TypeScript check.
 - `npm run lint`: ESLint.
 
+## Deploy to Cloudflare Pages (direct upload)
+
+This portfolio exports a static website, including its fonts, images and videos. It does not require a Node.js server at runtime.
+
+1. Run `npm ci` in this local checkout, where the font files are present.
+2. Run `npm run lint`, `npm run typecheck`, and `npm run build`.
+3. In Cloudflare **Workers & Pages**, create a **Pages** project using **Direct Upload**.
+4. Upload the contents of the generated `out/` folder (or a ZIP with `index.html` at its root).
+5. Add your domain under that Pages project's **Custom domains** and follow Cloudflare's DNS instructions.
+
+For later updates, rebuild locally and upload the new `out/` folder to the same project. Use `npm run dev` for development; `next start` is not used for static exports.
+
+The production build uses Webpack. Images are served as static files, so no Next.js image-optimisation server or Cloudflare Worker is required. The generated `out/` folder is intentionally excluded from Git. Font source files also stay out of Git; a Cloudflare Git-based build would need those files supplied separately. Direct Upload preserves the existing design without committing the fonts.
+
 ## Assets
 
 Project screenshots and demos show the projects featured on the site. Phosphor and Lucide icon licence notices are included in `assets/`. Third-party artwork, logos, and fonts retain their respective ownership.

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import { motion, useMotionValue, useSpring, Variants, Transition } from "motion/react";
+import { MotionConfig, motion, useMotionValue, useReducedMotion, useSpring, Variants, Transition } from "motion/react";
 
 import acLeafExpanded from "@/assets/example-expand.png";
 import sayHeyButton from "@/assets/say-hey-button.png";
@@ -95,33 +95,36 @@ interface TypewriterTextProps {
 
 function TypewriterText({ text, delay = 0 }: TypewriterTextProps) {
   const [displayed, setDisplayed] = useState("");
-  const [started, setStarted] = useState(false);
+  const reducedMotion = useReducedMotion();
 
   useEffect(() => {
-    const timeout = setTimeout(() => setStarted(true), delay * 1000);
-    return () => clearTimeout(timeout);
-  }, [delay]);
-
-  useEffect(() => {
-    if (!started) return;
-    let i = 0;
-    setDisplayed("");
-    const interval = setInterval(() => {
-      i++;
-      setDisplayed(text.slice(0, i));
-      if (i >= text.length) clearInterval(interval);
-    }, 38);
-    return () => clearInterval(interval);
-  }, [started, text]);
+    if (reducedMotion) return;
+    let interval: ReturnType<typeof setInterval> | undefined;
+    const timeout = setTimeout(() => {
+      let i = 0;
+      setDisplayed("");
+      interval = setInterval(() => {
+        i++;
+        setDisplayed(text.slice(0, i));
+        if (i >= text.length) clearInterval(interval);
+      }, 38);
+    }, delay * 1000);
+    return () => {
+      clearTimeout(timeout);
+      clearInterval(interval);
+    };
+  }, [delay, reducedMotion, text]);
 
   return (
     <p className="dialogue-text">
-      {displayed}
-      {displayed.length < text.length && (
+      <span className="sr-only">{text}</span>
+      <span aria-hidden="true">{reducedMotion ? text : displayed}</span>
+      {!reducedMotion && displayed.length < text.length && (
         <motion.span
           animate={{ opacity: [1, 0, 1] }}
           transition={{ duration: 0.6, repeat: Infinity }}
           style={{ marginLeft: 2 }}
+          aria-hidden="true"
         >
           ▌
         </motion.span>
@@ -132,14 +135,18 @@ function TypewriterText({ text, delay = 0 }: TypewriterTextProps) {
 
 // ── Main component ────────────────────────────────────────────────────────────
 export default function HeroSection() {
+  const reducedMotion = useReducedMotion();
   const [showTagHint, setShowTagHint] = useState(false);
   const [tagHintDismissed, setTagHintDismissed] = useState(false);
   useEffect(() => {
-    try {
-      setShowTagHint(localStorage.getItem("portfolio-developer-tag-dragged") !== "1");
-    } catch {
-      setShowTagHint(true);
-    }
+    const frame = requestAnimationFrame(() => {
+      try {
+        setShowTagHint(localStorage.getItem("portfolio-developer-tag-dragged") !== "1");
+      } catch {
+        setShowTagHint(true);
+      }
+    });
+    return () => cancelAnimationFrame(frame);
   }, []);
   const tagRef = useRef<HTMLDivElement>(null);
   const tagGrab = useRef({ x: 0, y: 0, angle: 0, rotation: 0 });
@@ -158,7 +165,7 @@ export default function HeroSection() {
   }
 
   return (
-    <>
+    <MotionConfig reducedMotion="user">
       <style>{`
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -490,13 +497,14 @@ export default function HeroSection() {
           }
         }}
       >
+      <h1 className="sr-only">Rayyan Ahsan — Full-stack developer</h1>
       <div className="hero-root" id="top">
 
         {/* Topbar */}
         <div className="topbar">
           <motion.div
             variants={fadeIn(0)}
-            initial="hidden"
+            initial={reducedMotion ? false : "hidden"}
             animate="show"
           >
             <motion.button
@@ -532,7 +540,7 @@ export default function HeroSection() {
             className="say-hey-btn button-shine"
             href={`mailto:${EMAIL}`}
             variants={slideInRight(0.2)}
-            initial="hidden"
+            initial={reducedMotion ? false : "hidden"}
             animate="show"
             whileHover={{ y: -2 }}
             whileTap={{ scale: 0.96 }}
@@ -554,7 +562,7 @@ export default function HeroSection() {
             <motion.div
               className="wood-sign-image"
               variants={fadeUp(0.3)}
-              initial="hidden"
+              initial={reducedMotion ? false : "hidden"}
               animate="show"
             >
                 <Image
@@ -569,7 +577,7 @@ export default function HeroSection() {
               className="tag-image"
               ref={tagRef}
               variants={tagPop}
-              initial="hidden"
+              initial={reducedMotion ? false : "hidden"}
               animate="show"
               onPanStart={(_, info) => {
                 setTagHintDismissed(true);
@@ -632,7 +640,7 @@ export default function HeroSection() {
         <motion.div
           className="dialogue-section"
           variants={fadeUp(0.7)}
-          initial="hidden"
+          initial={reducedMotion ? false : "hidden"}
           animate="show"
         >
           <div className="dialogue-bubble-wrapper">
@@ -646,7 +654,7 @@ export default function HeroSection() {
             <motion.div
               className="dialogue-label"
               variants={labelPop}
-              initial="hidden"
+              initial={reducedMotion ? false : "hidden"}
               animate="show"
             >
               Rayyan
@@ -662,10 +670,10 @@ export default function HeroSection() {
           <motion.div
             className="cat-character"
             variants={catBounce}
-            initial="hidden"
+            initial={reducedMotion ? false : "hidden"}
             animate="show"
           >
-            <motion.div animate={catSway}>
+            <motion.div animate={reducedMotion ? { rotate: 0 } : catSway}>
               <Image
                 src={catCharacter}
                 alt="Rayyan's character"
@@ -680,7 +688,7 @@ export default function HeroSection() {
         <motion.div
           className="footer-links"
           variants={fadeIn(1.1)}
-          initial="hidden"
+          initial={reducedMotion ? false : "hidden"}
           animate="show"
         >
           <a className="animated-underline" href={`mailto:${EMAIL}`}>Email</a>
@@ -694,6 +702,6 @@ export default function HeroSection() {
       <About />
       <Projects />
       </main>
-    </>
+    </MotionConfig>
   );
 }
