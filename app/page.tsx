@@ -11,6 +11,7 @@ import developerTag from "@/assets/developer-tag.png";
 import dialogueBox from "@/assets/dialogue-box-high-res.png";
 import catCharacter from "@/assets/cat-character.png";
 import Projects from "./components/projects";
+import About from "./components/about";
 import ScrollLink from "./components/scroll-link";
 import ScrollCue from "./components/scroll-cue";
 
@@ -690,6 +691,7 @@ export default function HeroSection() {
           <ScrollCue />
         </motion.div>
       </div>
+      <About />
       <Projects />
       </main>
     </>

@@ -282,7 +282,7 @@ export default function Projects() {
         transition={{ duration: reducedMotion ? 0 : 0.5, ease: [0.22, 1, 0.36, 1] }}
       >
         <svg className={styles.sectionDivider} viewBox="0 0 1440 64" preserveAspectRatio="none">
-          <path d="M0 24Q180 0 360 24T720 24T1080 24T1440 24V64H0Z" fill="#eee2c9" />
+          <path d="M0 24Q180 0 360 24T720 24T1080 24T1440 24V64H0Z" fill="#e4d4b5" />
           <path d="M0 24Q180 0 360 24T720 24T1080 24T1440 24" fill="none" stroke="#d1bfa0" strokeWidth="2" vectorEffect="non-scaling-stroke" />
         </svg>
       </motion.div>
