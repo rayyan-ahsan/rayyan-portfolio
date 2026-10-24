@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build --webpack",
+    "build": "node scripts/prepare-fonts.mjs && next build --webpack",
     "typecheck": "tsc --noEmit --incremental false",
     "lint": "eslint"
   },
