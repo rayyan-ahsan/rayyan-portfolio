@@ -14,6 +14,7 @@ import Projects from "./components/projects";
 import About from "./components/about";
 import ScrollLink from "./components/scroll-link";
 import ScrollCue from "./components/scroll-cue";
+import PortfolioLoader from "./components/portfolio-loader";
 
 const EMAIL = "rayyan@rayyanahsan.com";
 const LINKEDIN = "https://www.linkedin.com/in/rayyanahsan/";
@@ -134,7 +135,11 @@ function TypewriterText({ text, delay = 0 }: TypewriterTextProps) {
 }
 
 // ── Main component ────────────────────────────────────────────────────────────
-export default function HeroSection() {
+export default function Portfolio() {
+  return <PortfolioLoader><HeroSection /></PortfolioLoader>;
+}
+
+function HeroSection() {
   const reducedMotion = useReducedMotion();
   const [showTagHint, setShowTagHint] = useState(false);
   const [tagHintDismissed, setTagHintDismissed] = useState(false);
