@@ -495,6 +495,7 @@ function HeroSection() {
       `}</style>
 
       <main
+        className="portfolio-page"
         onDragStartCapture={(event) => {
           const target = event.target;
           if (target instanceof Element && target.closest("img, a, button")) {

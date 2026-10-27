@@ -15,10 +15,12 @@
 }
 
 body {
-  background: var(--background);
+  background: var(--projects-background);
   color: var(--foreground);
   font-family: var(--font-ac-ui), system-ui, sans-serif;
 }
+
+.portfolio-page { background: var(--background); }
 
 html {
   scroll-behavior: smooth;
