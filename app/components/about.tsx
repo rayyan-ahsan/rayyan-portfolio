@@ -119,7 +119,7 @@ export default function About() {
               <h4>A competitive streak</h4>
               <ul className={styles.achievements}>
                 <li><strong>Valorant</strong><span>Top 1,000 EU</span></li>
-                <li><strong>Teamfight Tactics</strong><span>Master</span></li>
+                <li><strong>Teamfight Tactics</strong><span>Grandmaster</span></li>
                 <li><strong>Deadlock</strong><span>Eternus</span></li>
                 <li><strong>CS:GO</strong><span>Global Elite</span></li>
               </ul>
